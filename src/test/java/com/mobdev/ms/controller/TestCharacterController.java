@@ -15,8 +15,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//@ExtendWith(SpringExtension.class)
+@ExtendWith(SpringExtension.class)
 public class TestCharacterController {
+    private MockMvc mockMvc;
  /*
     private MockMvc mockMvc;
    @BeforeEach
