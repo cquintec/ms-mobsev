@@ -6,9 +6,9 @@ import com.mobdev.ms.dtos.CharacterOriginInfoDto;
 import com.mobdev.ms.dtos.CharacterResponse;
 import com.mobdev.ms.dtos.LocationResponse;
 import com.mobdev.ms.service.CharacterMapperService;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class CharacterMapperServiceImpl implements CharacterMapperService {
     @Override
     public CharacterResponse convertCharacterToIntoCharacterResponse(
