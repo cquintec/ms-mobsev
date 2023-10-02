@@ -24,8 +24,7 @@ public class TestCharacterController {
     private MockMvc mockMvc;
 
    @Test
-   public void testGetCharacterAndLocationInfo() throws Exception
-   {
+   public void testGetCharacterAndLocationInfo() throws Exception{
        Mockito.when(characterAndOriginService.getCharacterAndLocationInfo(Mockito.anyInt()))
                .thenReturn(CharacterResponseFixture.getCharacterResponseFromJson());
        this.mockMvc
@@ -35,4 +34,15 @@ public class TestCharacterController {
                .andExpect(MockMvcResultMatchers.status().isOk())
                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_VALUE));
    }
+
+    @Test
+    public void testGetCharacterAndLocationInfo_param_missing() throws Exception{
+        Mockito.when(characterAndOriginService.getCharacterAndLocationInfo(Mockito.anyInt()))
+                .thenReturn(CharacterResponseFixture.getCharacterResponseFromJson());
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.get("/v1/character")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(MockMvcResultMatchers.status().is4xxClientError())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_VALUE));
+    }
 }

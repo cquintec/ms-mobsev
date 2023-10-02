@@ -3,6 +3,7 @@ package com.mobdev.ms.controller;
 import com.mobdev.ms.dtos.ErrorResponseDto;
 import com.mobdev.ms.enums.ErrorEnums;
 import com.mobdev.ms.exceptions.ApiClientException;
+import com.mobdev.ms.exceptions.CharacterMapperException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -54,4 +55,18 @@ public class ControllerExceptionHandler {
 
         return new ResponseEntity<>(errorResponseDto, null, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler({CharacterMapperException.class})
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<ErrorResponseDto> characterMapperException(
+            CharacterMapperException ex) {
+        ErrorResponseDto errorResponseDto = ErrorResponseDto.builder()
+                .codigo(ErrorEnums.CHARACTER_MAPPER_ERROR.getCode())
+                .timeStamp(LocalDateTime.now())
+                .detail(ErrorEnums.CHARACTER_MAPPER_ERROR.getMessage()+ex.getMessage())
+                .build();
+
+        return new ResponseEntity<>(errorResponseDto, null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

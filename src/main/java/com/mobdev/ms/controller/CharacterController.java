@@ -2,6 +2,7 @@ package com.mobdev.ms.controller;
 
 import com.mobdev.ms.dtos.CharacterResponse;
 import com.mobdev.ms.exceptions.ApiClientException;
+import com.mobdev.ms.exceptions.CharacterMapperException;
 import com.mobdev.ms.service.CharacterAndOriginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -19,7 +20,7 @@ public class CharacterController {
     private final CharacterAndOriginService characterAndOriginService;
     @GetMapping(value = "/character",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public CharacterResponse getCharacterAndLocationInfo(@RequestParam Integer id) throws ApiClientException {
+    public CharacterResponse getCharacterAndLocationInfo(@RequestParam Integer id) throws ApiClientException, CharacterMapperException {
 
         return characterAndOriginService.getCharacterAndLocationInfo(id);
     }

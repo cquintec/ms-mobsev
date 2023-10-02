@@ -20,6 +20,7 @@ public class RyMCharacterApiClient implements IRyMCharacterApiClient, IRyMLocati
     private String locationPath;
 
     RestTemplate restTemplate = new RestTemplate();
+    @Override
     public Object getCharacterById(Integer id) throws ApiClientException {
         try{
 
@@ -33,7 +34,7 @@ public class RyMCharacterApiClient implements IRyMCharacterApiClient, IRyMLocati
                     ErrorEnums.CHARACTER_CLIENT_ERROR.getCode());
         }
     }
-
+    @Override
     public Object getCharacterOriginByName(String name) throws ApiClientException {
         try {
 
