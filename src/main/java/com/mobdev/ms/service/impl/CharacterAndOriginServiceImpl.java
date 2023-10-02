@@ -10,15 +10,15 @@ import com.mobdev.ms.restclients.IRyMLocationApiClient;
 import com.mobdev.ms.service.CharacterAndOriginService;
 import com.mobdev.ms.service.CharacterMapperService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+
 
 @UseCase
 @RequiredArgsConstructor
 public class CharacterAndOriginServiceImpl implements CharacterAndOriginService {
 
-    private final IRyMCharacterApiClient ryMCharacterApiClient;
-    private final IRyMLocationApiClient ryMLocationApiClient;
     private final CharacterMapperService characterMapperService;
+    private final IRyMLocationApiClient ryMLocationApiClient;
+    private final IRyMCharacterApiClient ryMCharacterApiClient;
 
     @Override
     public CharacterResponse getCharacterAndLocationInfo(Integer id) throws ApiClientException {
