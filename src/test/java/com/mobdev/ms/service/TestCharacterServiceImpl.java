@@ -39,7 +39,7 @@ public class TestCharacterServiceImpl {
 
         Mockito.when(ryMCharacterApiClient.getCharacterById(Mockito.anyInt()))
                 .thenReturn(CharacterDtoFixture.getCharacterDto());
-        Mockito.when(ryMLocationApiClient.getLocationByName(Mockito.anyString()))
+        Mockito.when(ryMLocationApiClient.getCharacterOriginByName(Mockito.anyString()))
                 .thenReturn(CharacterOriginDtoFixture.getCharacterOriginDto());
         Mockito.when(characterMapperService.convertCharacterToIntoCharacterResponse(Mockito.any(),Mockito.any()))
                 .thenReturn(CharacterResponseFixture.getCharacterResponseFromJson());

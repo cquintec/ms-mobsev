@@ -4,5 +4,5 @@ import com.mobdev.ms.dtos.CharacterOriginDto;
 import com.mobdev.ms.exceptions.ApiClientException;
 
 public interface IRyMLocationApiClient {
-    CharacterOriginDto getLocationByName(String name) throws ApiClientException;
+    CharacterOriginDto getCharacterOriginByName(String name) throws ApiClientException;
 }

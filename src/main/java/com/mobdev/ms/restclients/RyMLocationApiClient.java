@@ -1,6 +1,9 @@
 package com.mobdev.ms.restclients;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mobdev.ms.dtos.CharacterDto;
 import com.mobdev.ms.dtos.CharacterOriginDto;
+import com.mobdev.ms.dtos.CharacterResponse;
 import com.mobdev.ms.enums.ErrorEnums;
 import com.mobdev.ms.exceptions.ApiClientException;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,19 +15,19 @@ import org.springframework.web.client.RestTemplate;
 public class RyMLocationApiClient implements IRyMLocationApiClient{
 
     @Value("${rym.api.client.protocol}")
-    private String protocol="https";
+    private String protocol;
     @Value("${rym.api.client.base.paht}")
-    private String basePath="//rickandmortyapi.com/api";
+    private String basePath;
     @Value("${rym.api.client.location.path}")
-    private String path="/location/?name=";
+    private String path;
     RestTemplate restTemplate = new RestTemplate();
-    public CharacterOriginDto getLocationByName(String name) throws ApiClientException {
+    public CharacterOriginDto getCharacterOriginByName(String name) throws ApiClientException {
         try {
 
-            ResponseEntity<CharacterOriginDto> response =
-                    restTemplate.getForEntity(createUrl(path)+name , CharacterOriginDto.class);
+            ResponseEntity<Object> response =
+                    restTemplate.getForEntity(createUrl(path)+name , Object.class);
 
-            return response.getBody();
+            return CharacterMapper.getCharacterOriginFromResponseBody(response.getBody());
         }catch (Exception ex){
             throw new ApiClientException(
                     ErrorEnums.LOCATION_CLIENT_ERROR.getMessage()+ ex.getMessage(),

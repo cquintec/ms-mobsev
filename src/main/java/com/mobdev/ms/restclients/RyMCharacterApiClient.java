@@ -1,5 +1,6 @@
 package com.mobdev.ms.restclients;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mobdev.ms.dtos.CharacterDto;
 import com.mobdev.ms.enums.ErrorEnums;
 import com.mobdev.ms.exceptions.ApiClientException;
@@ -21,9 +22,10 @@ public class RyMCharacterApiClient implements IRyMCharacterApiClient{
     public CharacterDto getCharacterById(Integer id) throws ApiClientException {
         try{
 
-            ResponseEntity<CharacterDto> response =
-                    restTemplate.getForEntity(createUrl(path)+id, CharacterDto.class);
-            return response.getBody();
+            ResponseEntity<Object> response =
+                    restTemplate.getForEntity(createUrl(path)+id, Object.class);
+
+            return CharacterMapper.getCharacterFromResponseBody(response.getBody());
         }catch (Exception ex){
             throw new ApiClientException(
                     ErrorEnums.CHARACTER_CLIENT_ERROR.getMessage() + ex.getMessage(),
