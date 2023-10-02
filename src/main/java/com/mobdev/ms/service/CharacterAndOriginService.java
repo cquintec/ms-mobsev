@@ -6,5 +6,6 @@ import com.mobdev.ms.exceptions.CharacterMapperException;
 
 public interface CharacterAndOriginService {
 
-    CharacterResponse getCharacterAndLocationInfo(Integer id) throws ApiClientException, CharacterMapperException;
+    CharacterResponse getCharacterAndLocationInfo(Integer id)
+            throws ApiClientException, CharacterMapperException;
 }
