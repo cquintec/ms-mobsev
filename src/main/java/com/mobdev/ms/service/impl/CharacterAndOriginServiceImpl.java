@@ -17,13 +17,13 @@ import lombok.RequiredArgsConstructor;
 public class CharacterAndOriginServiceImpl implements CharacterAndOriginService {
 
     private final CharacterMapperService characterMapperService;
-    private final CharacterLocationService ryMLocationApiClient;
-    private final CharacterService ryMCharacterApiClient;
+    private final CharacterLocationService locationService;
+    private final CharacterService characterService;
 
     @Override
     public CharacterResponse getCharacterAndLocationInfo(Integer id) throws ApiClientException {
-        CharacterDto characterDto = ryMCharacterApiClient.getCharacterById(id);
-        CharacterOriginDto characterLocationInfoDto = ryMLocationApiClient
+        CharacterDto characterDto = characterService.getCharacterById(id);
+        CharacterOriginDto characterLocationInfoDto = locationService
                 .getCharacterOriginByName(characterDto.getOrigin().getName());
 
         return characterMapperService

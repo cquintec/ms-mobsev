@@ -1,10 +1,10 @@
 package com.mobdev.ms.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mobdev.ms.annotations.PersistanceData;
 import com.mobdev.ms.dtos.CharacterDto;
 import com.mobdev.ms.dtos.CharacterOriginDto;
 import com.mobdev.ms.exceptions.ApiClientException;
-import com.mobdev.ms.restclients.CharacterMapper;
 import com.mobdev.ms.restclients.IRyMCharacterApiClient;
 import com.mobdev.ms.restclients.IRyMLocationApiClient;
 import com.mobdev.ms.service.CharacterLocationService;
@@ -21,13 +21,22 @@ public class CharacterPersistanceImpl implements CharacterService, CharacterLoca
     @Override
     public CharacterDto getCharacterById(Integer id) throws ApiClientException {
         Object response = ryMCharacterApiClient.getCharacterById(id);
-        return CharacterMapper.getCharacterFromResponseBody(response);
+        return getCharacterFromResponseBody(response);
     }
 
     @Override
     public CharacterOriginDto getCharacterOriginByName(String name) throws ApiClientException {
         Object response = ryMLocationApiClient.getCharacterOriginByName(name);
-        return CharacterMapper.getCharacterOriginFromResponseBody(response);
+        return getCharacterOriginFromResponseBody(response);
     }
 
+    private CharacterOriginDto getCharacterOriginFromResponseBody(Object response) {
+        ObjectMapper mapper= new ObjectMapper();
+        return mapper.convertValue(response,CharacterOriginDto.class);
+    }
+
+    private CharacterDto getCharacterFromResponseBody(Object response) {
+        ObjectMapper mapper= new ObjectMapper();
+        return mapper.convertValue(response,(CharacterDto.class));
+    }
 }

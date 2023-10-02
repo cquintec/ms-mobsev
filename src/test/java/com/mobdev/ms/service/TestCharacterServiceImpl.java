@@ -23,9 +23,9 @@ public class TestCharacterServiceImpl {
     private CharacterAndOriginServiceImpl characterAndOriginService;
 
     @Mock
-    private IRyMCharacterApiClient ryMCharacterApiClient;
+    private CharacterService characterService;
     @Mock
-    private IRyMLocationApiClient ryMLocationApiClient;
+    private CharacterLocationService locationService;
     @Mock
     private CharacterMapperService characterMapperService;
 
@@ -37,9 +37,9 @@ public class TestCharacterServiceImpl {
     @Test
     void testGetCharacterInfoById_OK() throws ApiClientException {
 
-        Mockito.when(ryMCharacterApiClient.getCharacterById(Mockito.anyInt()))
+        Mockito.when(characterService.getCharacterById(Mockito.anyInt()))
                 .thenReturn(CharacterDtoFixture.getCharacterDto());
-        Mockito.when(ryMLocationApiClient.getCharacterOriginByName(Mockito.anyString()))
+        Mockito.when(locationService.getCharacterOriginByName(Mockito.anyString()))
                 .thenReturn(CharacterOriginDtoFixture.getCharacterOriginDto());
         Mockito.when(characterMapperService.convertCharacterToIntoCharacterResponse(Mockito.any(),Mockito.any()))
                 .thenReturn(CharacterResponseFixture.getCharacterResponseFromJson());
