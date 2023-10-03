@@ -1,4 +1,4 @@
-package com.mobdev.ms.service.impl;
+package com.mobdev.ms.persistance;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mobdev.ms.annotations.PersistanceData;
@@ -7,8 +7,6 @@ import com.mobdev.ms.dtos.CharacterOriginDto;
 import com.mobdev.ms.exceptions.ApiClientException;
 import com.mobdev.ms.restclients.IRyMCharacterApiClient;
 import com.mobdev.ms.restclients.IRyMLocationApiClient;
-import com.mobdev.ms.service.CharacterLocationService;
-import com.mobdev.ms.service.CharacterService;
 import lombok.RequiredArgsConstructor;
 
 @PersistanceData

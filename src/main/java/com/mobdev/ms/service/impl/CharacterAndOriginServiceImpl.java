@@ -7,9 +7,9 @@ import com.mobdev.ms.dtos.CharacterResponse;
 import com.mobdev.ms.exceptions.ApiClientException;
 import com.mobdev.ms.exceptions.CharacterMapperException;
 import com.mobdev.ms.service.CharacterAndOriginService;
-import com.mobdev.ms.service.CharacterLocationService;
-import com.mobdev.ms.service.CharacterMapperService;
-import com.mobdev.ms.service.CharacterService;
+import com.mobdev.ms.persistance.CharacterLocationService;
+import com.mobdev.ms.mappers.ICharacterMapper;
+import com.mobdev.ms.persistance.CharacterService;
 import lombok.RequiredArgsConstructor;
 
 
@@ -17,9 +17,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CharacterAndOriginServiceImpl implements CharacterAndOriginService {
 
-    private final CharacterMapperService characterMapperService;
-    private final CharacterLocationService locationService;
     private final CharacterService characterService;
+    private final CharacterLocationService locationService;
+    private final ICharacterMapper characterMapperService;
 
     @Override
     public CharacterResponse getCharacterAndLocationInfo(Integer id)

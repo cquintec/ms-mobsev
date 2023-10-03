@@ -7,7 +7,7 @@ import com.mobdev.ms.dtos.CharacterResponse;
 import com.mobdev.ms.exceptions.CharacterMapperException;
 import com.mobdev.ms.fixture.CharacterDtoFixture;
 import com.mobdev.ms.fixture.CharacterOriginDtoFixture;
-import com.mobdev.ms.service.impl.CharacterMapperServiceImpl;
+import com.mobdev.ms.mappers.CharacterMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,14 +24,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestConvertDtoToResponseObjectServiceImpl {
 
     @InjectMocks
-    private CharacterMapperServiceImpl dtoToResponseObjectService;
+    private CharacterMapper characterMapper;
 
     @DisplayName("Dto convert to Response OK")
     @Test
     void testConvertCharacterToIntoCharacterResponse_OK() throws CharacterMapperException {
         CharacterDto characterDto = CharacterDtoFixture.getCharacterDto();
         CharacterOriginDto characterOriginDto = CharacterOriginDtoFixture.getCharacterOriginDto();
-        CharacterResponse response = dtoToResponseObjectService.convertCharacterToIntoCharacterResponse(
+        CharacterResponse response = characterMapper.convertCharacterToIntoCharacterResponse(
                 characterDto,
                 characterOriginDto);
         assertAll("response",
@@ -47,7 +47,7 @@ public class TestConvertDtoToResponseObjectServiceImpl {
         CharacterOriginDto characterOriginDto =
                 new CharacterOriginDto(new CharacterOriginResponseInfo(),new ArrayList<>());
         Assertions.assertThrows(CharacterMapperException.class,
-                () -> this.dtoToResponseObjectService.convertCharacterToIntoCharacterResponse(
+                () -> this.characterMapper.convertCharacterToIntoCharacterResponse(
                 characterDto,
                 characterOriginDto));
     }
@@ -59,7 +59,7 @@ public class TestConvertDtoToResponseObjectServiceImpl {
         CharacterOriginDto characterOriginDto =
                 new CharacterOriginDto(new CharacterOriginResponseInfo(),new ArrayList<>());
         Assertions.assertThrows(CharacterMapperException.class,
-                () -> this.dtoToResponseObjectService.convertCharacterToIntoCharacterResponse(
+                () -> this.characterMapper.convertCharacterToIntoCharacterResponse(
                         characterDto,
                         characterOriginDto));
     }

@@ -1,4 +1,4 @@
-package com.mobdev.ms.service;
+package com.mobdev.ms.persistance;
 
 import com.mobdev.ms.dtos.CharacterDto;
 import com.mobdev.ms.exceptions.ApiClientException;
